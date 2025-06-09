@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from statsmodels.formula.api import logit
 car_insurance = pd.read_csv("car_insurance.csv")
-#fill missing values with the mean 
+#Fill missing values with the mean 
 car_insurance['credit_score'].fillna(car_insurance['credit_score'].mean(), inplace = True)
 car_insurance['annual_mileage'].fillna(car_insurance['annual_mileage'].mean(), inplace = True)
 #Creating a list to store the models
