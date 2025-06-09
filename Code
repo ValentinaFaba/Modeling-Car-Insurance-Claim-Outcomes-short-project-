@@ -1,0 +1,32 @@
+# Import required modules
+import pandas as pd
+import numpy as np
+from statsmodels.formula.api import logit
+car_insurance = pd.read_csv("car_insurance.csv")
+#fill missing values with the mean 
+car_insurance['credit_score'].fillna(car_insurance['credit_score'].mean(), inplace = True)
+car_insurance['annual_mileage'].fillna(car_insurance['annual_mileage'].mean(), inplace = True)
+#Creating a list to store the models
+models = []
+#Build one model per feature and save the results to a list.
+features = car_insurance.drop(columns = ['id', 'outcome']).columns
+for col in features:
+    model = logit(f"outcome ~ {col}", data = car_insurance).fit()
+    models.append(model)
+#Calculate the accuracy of each model
+accuracies = []
+for feature in range(0, len(models)):
+    #Creating a confusion matrix and storing individual metrics
+    conf_matrix = models[feature].pred_table()
+    tn = conf_matrix[0,0]
+    fp = conf_matrix[0,1]
+    tp = conf_matrix[1,1]
+    fn = conf_matrix[1,0]
+    acc = (tn + tp) / (tn + fp + tp + fn)
+    accuracies.append(acc)
+#Finding the best performing model
+best_feature = features[accuracies.index(max(accuracies))]
+best_feature_df = pd.DataFrame({"best_feature" : best_feature,
+                               "best_accuracy" : max(accuracies)},
+                              index = [0])
+print(best_feature_df)
