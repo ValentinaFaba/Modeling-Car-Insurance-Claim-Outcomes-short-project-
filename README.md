@@ -1,7 +1,7 @@
 # Modeling-Car-Insurance-Claim-Outcomes-short-project-
 Clean customer data and use logistic regression to predict whether people will make a claim on their car insurance.
 
-On the Road car insurance have requested services in building a model to predict whether a customer will make a claim on their insurance during the policy period. The task is to identify the single feature that results in the best performing model, as measured by accuracy, so they can start with a simple model in production.
+A car insurance company have requested services in building a model to predict whether a customer will make a claim on their insurance during the policy period. The task is to identify the single feature that results in the best performing model, as measured by accuracy, so they can start with a simple model in production.
 
 The customer data is a csv file called `car_insurance.csv`, along with a table detailing the column names and descriptions below.
 ## The dataset
